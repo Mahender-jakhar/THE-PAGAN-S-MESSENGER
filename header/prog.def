@@ -1,0 +1,374 @@
+#include "imp.dec"
+
+
+
+user::user(){
+	cout<<"\nEnter username : ";
+	cin>>this->username;
+}
+
+int user::login(){
+	char passwd[70];
+	try{
+		ifstream f;
+		f.open(("./.user_data/" + this->username + "/.conf")); //.c_type()
+		if(f.fail()){
+       		throw 1;
+    	}
+    
+		f >> passwd;
+		f.close();
+		
+	}
+	catch(...){
+			cout<<"\nInvalid username.";
+			return 0;
+	}
+	char pwd[69];
+	cout<<"\nEnter Password : ";
+	cin>>pwd;
+    
+	if(passwd == SHA256(pwd)){
+		cout<<"\nLogged in";
+		return 1;
+	}
+	cout<<"\nInvalid Password";
+	return 0;
+}
+
+int user::signup(){
+	char passwd[80];
+
+	//try{
+		
+	//	cout<<  fexists("./.user_data/"+this->username + "/.conf");
+if(fexists("./.user_data/"+this->username + "/.conf")==1)
+	{
+		cout<<"\nalready exist > ";
+		cout<<"\ntry again > ";
+		//system("pause");
+        return 0;
+    }
+        //{
+        //cout<<"*";
+        //i++;
+        //test.push_back(pwd[i]);
+        //}
+    char pwd[80];
+    cout<<"\nenter password > ";
+				cin>>pwd;
+
+			ofstream fout;
+			fout.open(("./.user_data/" + this->username + "/.conf")); //.c_type()
+			fout << SHA256(pwd) <<endl;
+
+			fout.close();
+			
+			fout.open(("./.user_data/" + this->username + "/.inbox")); //.c_type()
+			
+			fout.close();
+
+			return 1;
+	}
+
+
+
+
+int user::inbox()
+{    string m;
+cout<<"your inbox";
+ifstream f;
+cout<<endl;
+int chabi=keygenerator(this->username);	
+f.open(("./.user_data/" + this->username + "/.inbox"));
+
+//cout<<"debugger"<<m[26]<<"27"<<m[28]<<"28"<<endl;
+/*if(m[26]=='0')
+{  m[26]='1';
+   cout<<m;
+   
+   
+   while(f){
+	getline(f,m);
+	cout<<m<<endl;
+}
+f.close();
+return 1;
+}
+
+if(m[26]=='1')
+{ cout<<"dog";
+	m[26]='2';
+	m=m+"  read ";
+}	
+cout<<m;
+*/
+while(f){
+
+    getline(f,m);
+   	
+	cout<<decryption(chabi,m)<<endl;
+}
+f.close();
+return 1;
+
+}
+int user::sendmsg()
+{  daju:
+   cout<<"enter name of person to send msg > ";
+   string reciever;
+   cin.ignore();
+   getline(cin, reciever);
+   	
+   try
+   { 
+    ifstream f;
+
+   	f.open(("./.user_data/" + reciever + "/.inbox"));
+   	if(f.fail())
+   	{  // cout<<"invalid";
+   		throw(1);
+     
+   	}
+   	f.close();
+   	cout<<reciever;
+   cout<<" enter message needs to be send > ";
+   string message;
+   getline(cin, message);
+   int chabi=keygenerator(reciever);
+   	ofstream fout;
+			fout.open(("./.user_data/" + reciever + "/.inbox"),ios::app); //.c_type()
+		   fout <<encryption(chabi , this->username);
+		   fout <<encryption(chabi , " : ");
+
+	       fout <<encryption(chabi , __TIMESTAMP__);
+	           fout <<encryption(chabi , " :  ");
+  
+	       string change =encryption(chabi , message);
+            
+		   fout << change <<endl;
+
+			fout.close();
+       //  cout<<"\n=======================================================congo!! your msg is send sucessfully================================================";
+          return 1;
+
+   }
+  catch(...){
+			
+			cout<<"\nInvalid username > "<<reciever;
+			cout<<"try other name"<<endl;
+			goto daju;
+			return 0;
+	}
+	return 0;
+}
+
+int user::creategroup()
+{   
+	char secureC[345];
+
+	cout<<" name your group ";
+	cin>>groupname;
+	 
+
+    try{
+		ifstream f;
+		f.open(("./.user_data/" + this->groupname + "/.conf")); //.c_type()
+		if(f.fail()){
+       		throw 1;
+    	}
+    	f.close();
+		cout<<"\ngroup name already exits";
+		return 0;
+	}
+	catch(...){
+			if(system(("mkdir -p ./.user_data/" + this->groupname).c_str()))
+				{
+				cout<<"\ndo not have permission to make dir";
+				return 0;
+			}
+			char pwd[89];
+			cout<<" enter the security code for group > ";
+            cin>>secureC;
+			ofstream f;
+			f.open(("./.user_data/" + this->groupname + "/.conf")); //.c_type()
+            f << SHA256(secureC) <<endl;
+			f.close();
+			
+			f.open(("./.user_data/" + this->groupname + "/.inbox")); //.c_type()
+			
+			f.close();
+
+			return 1;
+	}
+
+
+}
+
+
+
+
+
+
+
+
+int user::joingroup()
+{   
+	char secureC[564];
+
+	cout<<"\nname group to be joined > ";
+	cin>>groupname;
+	
+int chabi=keygenerator(this->groupname);
+ char passwd[87];
+	try{
+		ifstream f;
+		f.open(("./.user_data/" + groupname+ "/.conf")); //.c_type()
+		if(f.fail()){
+       		throw 1;
+    	}
+		
+		f >> passwd;
+		f.close();
+	}
+	catch(...){
+			cout<<"\nInvalid groupname.";
+			return 0;
+	}
+
+	cout<<"\nEnter security-code > ";
+	cin>>secureC;
+	if(passwd == SHA256(secureC)){
+		header();
+		cout<<"\njoined group --->"<<this->groupname;
+
+		
+        snoop:
+		cout<<" \nenter > "<<this->username<<" > "<<this->groupname<<" > ";
+		string groupcmd;
+		cin>>groupcmd;
+		transform(groupcmd.begin(), groupcmd.end(), groupcmd.begin(), ::tolower);
+		if(groupcmd=="sendmsg")
+		{
+
+			cout<<"enter message needs to be send in the group > ";
+            string message;
+             cin.ignore();
+
+            getline(cin, message);
+   try
+   { 
+    ifstream f;
+   	f.open(("./.user_data/" + this->groupname + "/.inbox"));
+   	if(f.fail())
+   	{
+   		throw(1);
+     
+   	}
+   	f.close();
+   	ofstream fout;
+			fout.open(("./.user_data/" + this->groupname + "/.inbox"),ios::app); //.c_type()
+		   
+		   fout<<encryption(chabi , this->username);
+	       fout <<encryption(chabi , " : ");
+
+	       fout <<encryption(chabi , __TIMESTAMP__);
+	           fout <<encryption(chabi , " :  ");
+  
+	       fout<<encryption(chabi , message);
+
+			fout.close();
+			
+		}
+		catch(...)
+		{
+			cout<<"\ninvalid entry "; 
+            cout<<"\n try again > ";
+           goto snoop; 
+		}
+	
+
+
+ 
+
+
+
+
+
+
+goto snoop;
+
+
+
+		}
+   if(groupcmd=="exitroom")
+{
+  footer();
+
+
+		return 1; }
+
+
+		else if(groupcmd=="inbox")
+		{
+
+
+ string m;
+cout<<"MESSAGES IN THE GROUP > "<<endl;
+ifstream f;
+
+f.open(("./.user_data/" + this->groupname + "/.inbox"));
+
+
+//cout<<"debugger"<<m[26]<<"27"<<m[28]<<"28"<<endl;
+/*if(m[26]=='0')
+{  m[26]='1';
+   cout<<m;
+   
+   
+   while(f){
+	getline(f,m);
+	cout<<m<<endl;
+}
+f.close();
+return 1;
+}
+while(f){
+
+    getline(f,m);
+   	
+	cout<<decryption(chabi,m)<<endl;
+}
+if(m[26]=='1')
+{ cout<<"dog";
+	m[26]='2';
+	m=m+"  read ";
+}	
+cout<<m;
+*/
+while(f){
+	getline(f,m);
+	cout<<"\t"<<decryption(chabi,m)<<endl;
+}
+f.close();
+goto snoop;
+
+
+		}
+		else if(groupcmd=="help")
+		{
+			help();
+			
+			goto snoop;
+		}
+		else
+		 {
+		cout<<"wrong cmd";
+		goto snoop;
+	     } 
+	}
+	else cout<<"\nInvalid Password";
+	return 0;
+}
+
+

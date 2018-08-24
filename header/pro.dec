@@ -1,0 +1,16 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm> 
+#include<fstream>
+#include<cstdio>					
+#include<cstring>					
+#include<iomanip>					
+using namespace std;
+#include "sha256hash.lib"
+#include "keygenerator.hk"
+#include "private-encryption-key.hk2"
+#include "prog.dec"
+user * kill;
+#include "prog.def"
+//#include "imp.dec"

@@ -1,0 +1,12 @@
+//////////////////////////////////////////////////////////////////XLAR8-PRIVATE-KEY-GENERATOR///////////////////////////////////////////////////////
+int keygenerator(string mess)
+{ int ke=0;
+  for(int i=0;i<mess.size();i++)
+{
+	ke=ke+int(mess[i]);
+}
+
+	return ke*mess.size();
+}
+
+
