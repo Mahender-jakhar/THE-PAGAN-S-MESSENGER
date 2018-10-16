@@ -17,6 +17,6 @@ int main ()
 }
 }
 	goto start;	footer();
-	cout<<"\nHave a nice f day";
+	cout<<"\nHave a nice day Ahead";
 	return 0;
 }
