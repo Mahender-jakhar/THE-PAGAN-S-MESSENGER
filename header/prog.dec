@@ -2,15 +2,16 @@ class user
 {
 
 public:
-	 string username;
-	 string groupname;
+	
+        string username;
+	string groupname;
 	user();
 	int login();
 	int signup();
 	int inbox();
-    int sendmsg();
-    int creategroup();
-    int joingroup();
-    int joinchatroom();
+        int sendmsg();
+        int creategroup();
+        int joingroup();
+        int joinchatroom();
 
 };

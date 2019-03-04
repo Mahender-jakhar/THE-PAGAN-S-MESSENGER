@@ -6,17 +6,21 @@ int main ()
 	start:
 	kill = NULL;
 	int cnt = 1;
-	while(cnt){
+	
+	while(cnt)
+	{
 		if(kill == NULL)
 			cnt = main_menu();
 		else
-			{ usermenu:
+			{   usermenu:
 				cnt = user_menu();
 	//goto usermenu; }
 
-}
-}
+            }
+    }
+	
 	goto start;	footer();
 	cout<<"\nHave a nice day Ahead";
 	return 0;
+
 }
