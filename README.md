@@ -1,4 +1,4 @@
-# XLAR8 : THE PAGAN'S MESSENGER
+#  THE PAGAN'S MESSENGER
 -----------------------------------------------------------------------------------------------------------------------------------
 ### **A SECURE UFI MESSAGING  PORTAL TO CHAT  WITH YOUR FREINDS AND MAKE CHATROOMS ON YOUR LAN.**
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -19,5 +19,5 @@
 
  >TYPE HELP ( CMDS ARE NOT CASE SENSITIVE).
 
- >AFTER THIS YOU WILL GET ALL NEEDED COMMANDS IN THE TERMINAL FOR YOUR FURTHER ASSISTANCE.
+>AFTER THIS YOU WILL GET ALL NEEDED COMMANDS IN THE TERMINAL FOR YOUR FURTHER ASSISTANCE.
   
