@@ -9,7 +9,7 @@
 * PASSWORD IS BEING HASHED USING SHA256 ADDING TO IT , PRIVATE SALTS ARE ALSO ADDED FOR ALL USERS.
 -----------------------------------------------------------------------------------------------------------------------------------
 
-### ** HOW-TO-RUN :**
+### ** HOW-TO-RUN : **
 
  >MAKE  SERVER (SSH RECCOMANDED).
 
